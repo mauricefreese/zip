@@ -2,6 +2,8 @@ import zipfile, os
 import shutil
 import os.path
 import stat
+from os.path import basename
+
     # Text Style class
 class Color:
     BOLD = '\033[1m'
