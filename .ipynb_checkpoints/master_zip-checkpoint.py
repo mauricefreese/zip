@@ -27,8 +27,7 @@ print(Color.RED + e + a + Color.END)
 global folder
     # Abs path for Directory to zip
 folder = os.path.join(str(input('Enter the directory that needs to be zipped: ')))
-folder = os.path.normpath(folder)
-# folder = os.path.abspath(os.path.normpath(os.path.expanduser(folder)))
+folder = os.path.abspath(os.path.normpath(os.path.expanduser(folder)))
 
 extension = ".zip"
 
@@ -61,14 +60,17 @@ def backupToZip(folder):
     backupZip = zipfile.ZipFile(zipFilename, 'w')
 
     # Walk the entire folder tree and compress the files in each folder.
-    for dirpath, dirnames, filenames in os.walk(folder):
-        print('Adding files in %s...' % (dirpath))
+    for foldername, subfolders, filenames in os.walk(folder):
+        print('Adding files in %s...' % (foldername))
         # Add the current folder to the ZIP file.
-        backupZip.write(dirpath)
+        backupZip.write(foldername)
 
         # Add all the files in this folder to the ZIP file.
         for filename in filenames:
-            backupZip.write(os.path.join(dirpath, filename))
+            if filename.startswith(os.path.basename(folder) + '_') and filename.endswith('.zip'):
+                continue # Don't backup the backup ZIP files
+            #backupZip.write(os.path.join(foldername, filename))
+            backupZip.write(os.path.join(foldername, filename))
     backupZip.close()
     print('Done.')
     
