@@ -1,4 +1,5 @@
-import zipfile, os
+import zipfile
+import os
 import shutil
 import os.path
 import stat
@@ -41,7 +42,7 @@ def unpack_all_in_dir(folder):
         if item.endswith(extension):  # check for ".zip" extension
             file_name = os.path.abspath(abs_path)  # Get full path of file
             os.chmod(file_name, stat.S_IWRITE) # Changes from file permissions
-            zip_ref = zipfile.ZipFile(file_name)  # Create zipfile object
+            zip_ref = zipfile.ZipFile(file_name, 'r')  # Create zipfile object
             zip_ref.extractall(folder)  # Extract file to dir
             zip_ref.close()  # Close file
             os.remove(file_name)  # Delete zipped file
