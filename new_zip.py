@@ -33,7 +33,7 @@ global folder
 folder = os.path.join(str(input('Enter the directory that needs to be zipped: ')))
 folder = os.path.normpath(folder)
 # folder = os.path.abspath(os.path.normpath(os.path.expanduser(folder)))
-
+'''
 extension = ".zip"
 
 #os.chdir(folder)  # Change directory from working dir to dir with files
@@ -51,6 +51,7 @@ def unpack_all_in_dir(folder):
          #   unpack_all_in_dir(abs_path)  # Loop this function with inner folder
 
 unpack_all_in_dir(folder)
+'''
 
 def backupToZip(folder):    
     # Figure out the filename this code should used based on 
@@ -62,23 +63,15 @@ def backupToZip(folder):
         for filename in filenames:
             print('Adding files %s...' % (filename))
             make_archive(filename,'zip',filename)
-            x = folder + '\\' + filename
-            if x.endswith('.xls'):
-                make_archive(x,'zip')
-            elif x.endswith('.pdf'):
-                make_archive(x,'zip')
-            elif x.endswith('.xlsx'):
-                make_archive(x,'zip')
-            else:
-                continue
-
     print('Finished Zipping.')
+
 # This deletes the archive 'year' folders in the main path
     for f in os.listdir(folder):
         folder_delete = folder + '\\' + f
         if folder_delete.endswith('.zip'):
             os.remove(folder_delete)
-# This deletes the non-zip months
+
+            # This deletes the non-zip months
     for f in os.listdir(folder):
         files = folder + '\\' + f
         for folders, subfolders, filenames in os.walk(files):    
@@ -104,3 +97,28 @@ def backupToZip(folder):
             os.remove(base_delete)    
 
 backupToZip(folder)
+
+def singleZip():
+    for f in os.listdir(folder):
+        loose = os.path.join(folder,f)
+        for f in os.listdir(loose):
+            f = os.path.join(loose,f)
+            if f.endswith('.xls') or f.endswith('.pdf') or f.endswith('.xlsx'):
+                print('Loose files zipped: %s' % (f))
+                zipf = zipfile.ZipFile(f+'.zip','w',zipfile.ZIP_DEFLATED)
+                zipf.write(f,arcname=os.path.basename(f))
+                zipf.close()
+    print('Finished.')
+
+            # This deletes the non-zip months
+    for f in os.listdir(folder):
+        files = folder + '\\' + f
+        for folders, subfolders, filenames in os.walk(files):    
+            for sub in filenames:
+                f_delete = files + '\\' + sub
+                if f_delete.endswith('.zip'):
+                    continue
+                else:
+                        os.remove(f_delete)
+
+singleZip()
