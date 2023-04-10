@@ -54,8 +54,7 @@ unpack_all_in_dir(folder)
 '''
 
 def backupToZip(folder):    
-    # Figure out the filename this code should used based on 
-    # what files already exist.
+    # Figure out the filename this code should used based on what files already exist.
     # This is for if you input the whole "Historical" folder
 # The first section zips the months
     for dirpath, dirnames, filenames in os.walk(folder):
@@ -98,6 +97,7 @@ def backupToZip(folder):
 
 backupToZip(folder)
 
+'''
 def singleZip():
     for f in os.listdir(folder):
         loose = os.path.join(folder,f)
@@ -121,4 +121,13 @@ def singleZip():
                 else:
                         os.remove(f_delete)
 
+    # Cleans out CWD of copied zip files
+    current = os.getcwd()
+    for f in os.listdir(current):
+        current_delete = current + '\\' + f
+        if current_delete.endswith('.zip'):
+            os.remove(current_delete)
+
 singleZip()
+
+'''
