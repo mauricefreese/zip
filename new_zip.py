@@ -19,14 +19,20 @@ class Color:
     MAGENTA = '\033[95m'
         
 a = '2020'
-b = 'For all directory paths required, insert the ' + Color.BOLD + Color.MAGENTA + 'ABSOLUTE PATH' + Color.END + ' and ' + Color.BOLD + Color.UNDERLINE + Color.RED + 'NOT' + Color.END + ' the relative path.' 
+# b = 'For all directory paths required, insert the ' + Color.BOLD + Color.MAGENTA + 'ABSOLUTE PATH' + Color.END + ' and ' + Color.BOLD + Color.UNDERLINE + Color.RED + 'NOT' + Color.END + ' the relative path.' 
 c = 'Example:' 
-d = Color.UNDERLINE + 'Absolute Directory Path:' + Color.END + Color.UNDERLINE + Color.BOLD + ' S:\\' +'Clients'+ '\\' + Color.END +'Institution_Name'+ '\\' +'ALM'+ '\\' +'Historical'+ '\\' 
-e = Color.UNDERLINE + 'Relative Directory Path:' + Color.END + ' Instistution_Name' + '\\' +'ALM\Historical'+ '\\'
+# d = Color.UNDERLINE + 'Absolute Directory Path:' + Color.END + Color.UNDERLINE + Color.BOLD + ' S:\\' +'Clients'+ '\\' + Color.END +'Institution_Name'+ '\\' +'ALM'+ '\\' +'Historical'+ '\\' 
+# e = Color.UNDERLINE + 'Relative Directory Path:' + Color.END + ' Instistution_Name' + '\\' +'ALM\Historical'+ '\\'
+
+b = 'For all directory paths required, insert the ' + 'ABSOLUTE PATH' + ' and ' + 'NOT' + ' the relative path.' 
+d = 'Absolute Directory Path:' + ' S:\\' +'Clients'+ '\\' + 'Institution_Name'+ '\\' +'ALM'+ '\\' +'Historical'
+e = 'Relative Directory Path:' + ' Instistution_Name' + '\\' +'ALM\Historical'
 print(b)
-print(Color.UNDERLINE + Color.MAGENTA + c + Color.END)
-print(Color.GREEN + d + a+  Color.END)
-print(Color.RED + e + a + Color.END)
+# print(Color.UNDERLINE + Color.MAGENTA + c + Color.END)
+# print(Color.GREEN + d + a+  Color.END)
+#print(Color.RED + e + a + Color.END)
+print(c)
+print(d + '\n' + e)
 
 global folder
     # Abs path for Directory to zip
@@ -97,7 +103,7 @@ def backupToZip(folder):
 
 backupToZip(folder)
 
-'''
+
 def singleZip():
     for f in os.listdir(folder):
         loose = os.path.join(folder,f)
@@ -129,5 +135,3 @@ def singleZip():
             os.remove(current_delete)
 
 singleZip()
-
-'''
